@@ -28,7 +28,7 @@ public class SwiftPluginWifiConnectPlugin: NSObject, FlutterPlugin {
           connect(hotspotConfig: hotspotConfig, result: result)
           return
 
-        case "  ":
+        case "prefixConnect":
           guard #available(iOS 13.0, *) else {
             result(FlutterError(code: "iOS must be above 13", message: "Prefix connect doesn't work on iOS pre 13", details: nil))
             return
@@ -63,13 +63,13 @@ public class SwiftPluginWifiConnectPlugin: NSObject, FlutterPlugin {
       }
     } catch ArgsError.MissingArgs {
         result(
-          FlutterError( code: "missingArgs", 
+          FlutterError( code: "missingArgs",
             message: "Missing args",
             details: "Missing args."))
         return
     } catch {
         result(
-          FlutterError( code: "unknownError", 
+          FlutterError( code: "unknownError",
             message: "Unkown iOS error",
             details: error))
         return
@@ -117,7 +117,7 @@ public class SwiftPluginWifiConnectPlugin: NSObject, FlutterPlugin {
     }
   }
 
-  @available(iOS 11, *)   
+  @available(iOS 11, *)
   private func disconnect() -> Bool {
     let ssid: String? = getSSID()
     if(ssid == nil){
